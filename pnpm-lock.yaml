@@ -7,13 +7,18 @@ settings:
 overrides:
   adm-zip: 0.6.0
 
+patchedDependencies:
+  whistle@2.10.7:
+    hash: blmnii7akvw3p7inlvyl2jaqz4
+    path: patches/whistle@2.10.7.patch
+
 importers:
 
   .:
     dependencies:
       whistle:
         specifier: 2.10.7
-        version: 2.10.7
+        version: 2.10.7(patch_hash=blmnii7akvw3p7inlvyl2jaqz4)
 
 packages:
 
@@ -925,7 +930,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  whistle@2.10.7:
+  whistle@2.10.7(patch_hash=blmnii7akvw3p7inlvyl2jaqz4):
     dependencies:
       adm-zip: 0.6.0
       async-limiter: 2.0.0

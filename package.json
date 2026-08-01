@@ -34,15 +34,23 @@
   ],
   "scripts": {
     "check": "node --check bin/w2-lan.mjs && pnpm test",
+    "pack:release": "node scripts/pack-release.mjs",
+    "prepack": "pnpm run check",
     "prepublishOnly": "pnpm run check",
     "test": "node --test"
   },
   "dependencies": {
     "whistle": "2.10.7"
   },
+  "bundleDependencies": [
+    "whistle"
+  ],
   "pnpm": {
     "overrides": {
       "adm-zip": "0.6.0"
+    },
+    "patchedDependencies": {
+      "whistle@2.10.7": "patches/whistle@2.10.7.patch"
     }
   },
   "engines": {
