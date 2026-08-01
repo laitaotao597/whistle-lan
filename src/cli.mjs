@@ -29,6 +29,10 @@ import {
 } from './whistle.mjs';
 import { isWhistleRunning, updateWhistleRules } from './whistle-client.mjs';
 
+const packageVersion = JSON.parse(
+  readFileSync(new URL('../package.json', import.meta.url), 'utf8')
+).version;
+
 function applyRuntimeConfig(config, runtimeOptions) {
   return normalizeConfig({
     ...config,
@@ -342,7 +346,7 @@ async function main(argv = process.argv.slice(2), context = {}) {
       console.log(`http://${formatHostPort(endpoint.host, endpoint.port)}`);
       break;
     }
-    case 'version': case '--version': case '-V': console.log(`w2-lan 1.0.0 (Whistle ${getWhistleVersion() || 'missing'})`); break;
+    case 'version': case '--version': case '-V': console.log(`w2-lan ${packageVersion} (Whistle ${getWhistleVersion() || 'missing'})`); break;
     case 'help': case '--help': case '-h': help(); break;
     default: throw new Error(`Unknown command: ${command}`);
   }

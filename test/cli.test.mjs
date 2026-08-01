@@ -9,6 +9,7 @@ import test from 'node:test';
 
 const projectDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const cliPath = join(projectDir, 'bin', 'w2-lan.mjs');
+const packageVersion = JSON.parse(readFileSync(join(projectDir, 'package.json'), 'utf8')).version;
 
 function runCli(appDir, args) {
   return spawnSync(process.execPath, [cliPath, ...args], {
@@ -28,7 +29,7 @@ test('initializes config with the documented defaults and reports the command na
 
   const versionResult = runCli(appDir, ['version']);
   assert.equal(versionResult.status, 0);
-  assert.match(versionResult.stdout, /^w2-lan 1\.0\.0/);
+  assert.ok(versionResult.stdout.startsWith(`w2-lan ${packageVersion} (`));
 
   const initResult = runCli(appDir, ['init']);
   assert.equal(initResult.status, 0);

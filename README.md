@@ -15,29 +15,28 @@
 
 需要 Node.js 18 或更高版本。
 
-### 使用安装包
+### 从 npm 安装
 
-使用 pnpm 从 GitHub Release 直接安装最新版本：
+使用 pnpm 全局安装：
+
+```bash
+pnpm add --global whistle-lan
+w2-lan init
+```
+
+### 从 tgz 安装
+
+从 GitHub Release 直接安装最新版本：
 
 ```bash
 pnpm add --global "https://github.com/laitaotao597/whistle-lan/releases/latest/download/whistle-lan.tgz"
 w2-lan init
 ```
 
-也可以先[下载安装包](https://github.com/laitaotao597/whistle-lan/releases/latest/download/whistle-lan.tgz)，再从本地文件安装：
+也可以先[下载 tgz 安装包](https://github.com/laitaotao597/whistle-lan/releases/latest/download/whistle-lan.tgz)，再从本地文件安装：
 
 ```bash
 pnpm add --global ./whistle-lan.tgz
-w2-lan init
-```
-
-### 从源码安装
-
-```bash
-git clone https://github.com/laitaotao597/whistle-lan.git
-cd whistle-lan
-pnpm install --frozen-lockfile
-pnpm link --global
 w2-lan init
 ```
 
