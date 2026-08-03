@@ -6,7 +6,7 @@ const require = createRequire(import.meta.url);
 const requireFromWhistle = createRequire(require.resolve('whistle/package.json'));
 const AdmZip = requireFromWhistle('adm-zip');
 
-test('adm-zip override supports the APIs used by Whistle', () => {
+test('adm-zip used by Whistle supports the required APIs', () => {
   const archive = new AdmZip();
   archive.addFile('raw/session.txt', Buffer.from('compatible'));
   const buffer = archive.toBuffer();
