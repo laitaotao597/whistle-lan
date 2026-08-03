@@ -37,8 +37,16 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org/
           package-manager-cache: false
+
+      - name: Verify release tooling
+        run: |
+          node --version
+          npm --version
+          if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] || [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ]; then
+            echo "GitHub OIDC credentials are unavailable." >&2
+            exit 1
+          fi
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -72,7 +80,7 @@ jobs:
 
       - name: Publish npm package
         if: steps.npm-version.outputs.published != 'true'
-        run: npm publish
+        run: npm publish --loglevel=verbose
 
       - name: Publish GitHub release
         env:
