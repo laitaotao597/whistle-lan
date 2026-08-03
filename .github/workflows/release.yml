@@ -80,7 +80,7 @@ jobs:
 
       - name: Publish npm package
         if: steps.npm-version.outputs.published != 'true'
-        run: npm publish "dist/whistle-lan-${{ steps.package.outputs.version }}.tgz" --loglevel=verbose
+        run: npm publish "./dist/whistle-lan-${{ steps.package.outputs.version }}.tgz" --loglevel=verbose
 
       - name: Publish GitHub release
         env:
