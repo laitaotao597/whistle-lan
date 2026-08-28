@@ -59,7 +59,7 @@ w2-lan start --no-system-hosts --no-upstream
 # 临时把 HTTPS 域名转发到本地 HTTP 服务
 w2-lan start --mitm=app.example.test 127.0.0.1:3000
 
-# 安装 Whistle Root CA
+# 首次进行 HTTPS MITM 前安装并信任 Whistle Root CA
 w2-lan ca
 
 # 停止服务
@@ -82,6 +82,8 @@ w2-lan rules
 ```
 
 目标不带协议时保留原始请求协议和 Host。目标使用 `http://` 时，可以解密 HTTPS 请求并转发到 HTTP 服务。
+
+`--mitm` 只解密指定的源域名；其他 HTTPS 域名保持透传。首次使用前需要在代理启动后运行 `w2-lan ca`，或在已连接代理的设备上访问 [http://rootca.pro/](http://rootca.pro/) 下载证书，并按系统提示信任。
 
 `host` 和 `unhost` 会在服务运行时自动同步；服务未运行时，映射会在下次启动时加载。
 

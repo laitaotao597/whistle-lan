@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       whistle:
-        specifier: 2.10.8
-        version: 2.10.8
+        specifier: 2.10.9
+        version: 2.10.9
 
 packages:
 
@@ -439,8 +439,8 @@ packages:
   weinre2@1.3.6:
     resolution: {integrity: sha512-xKawRFdgaFvxDDsb0jJ7KpnqYaAFFMvd+VlhFHdi/YSCJSGjYCxjMHuDobViddZVosfiGkQQv6/GHKqxN98EaQ==}
 
-  whistle@2.10.8:
-    resolution: {integrity: sha512-Bg8qE9xE3FvQpR8gr5xX4NbqWOv75+GPT7p8Roh2xuMXC9gXNWjHZDurWDcgCi/twkaLLHcuRFSR63D/G8QKOQ==}
+  whistle@2.10.9:
+    resolution: {integrity: sha512-B4u/5aMCOXZmO4pFidjDKs9bXM8Z6AA6ibX1Qt87pGNFbHgp7loyvIEllx9sncx/m2PyOipgu/YCufJi2OPYJA==}
     engines: {node: '>= 8.8'}
     hasBin: true
 
@@ -922,7 +922,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  whistle@2.10.8:
+  whistle@2.10.9:
     dependencies:
       adm-zip: 0.6.0
       async-limiter: 2.0.0

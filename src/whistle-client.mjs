@@ -81,4 +81,16 @@ async function updateWhistleRules(endpoint, rules, credentials = {}, requester =
   return response.ec === 0;
 }
 
-export { isWhistleRunning, requestJson, updateWhistleRules };
+async function setGlobalHttpsCapture(endpoint, enabled, credentials = {}, requester = requestJson) {
+  const body = new URLSearchParams({ interceptHttpsConnects: enabled ? '1' : '0' }).toString();
+  const response = await requester(endpoint, {
+    body,
+    method: 'POST',
+    path: '/cgi-bin/intercept-https-connects',
+    username: credentials.username,
+    password: credentials.password
+  });
+  return response.ec === 0;
+}
+
+export { isWhistleRunning, requestJson, setGlobalHttpsCapture, updateWhistleRules };

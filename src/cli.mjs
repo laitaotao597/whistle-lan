@@ -27,7 +27,11 @@ import {
   resolveRuntimeCredentials,
   runWhistle
 } from './whistle.mjs';
-import { isWhistleRunning, updateWhistleRules } from './whistle-client.mjs';
+import {
+  isWhistleRunning,
+  setGlobalHttpsCapture,
+  updateWhistleRules
+} from './whistle-client.mjs';
 
 const packageVersion = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf8')
@@ -72,6 +76,7 @@ async function syncRules(paths, storage, runtimeOptions = {}, endpointOverride =
     password: runtimeOptions.password ?? config.uiPassword
   };
   if (!await isWhistleRunning(endpoint, STORAGE_NAME)) return false;
+  if (!await setGlobalHttpsCapture(endpoint, false, endpoint)) return false;
   return updateWhistleRules(endpoint, rules, endpoint);
 }
 
@@ -128,14 +133,26 @@ async function startProxy(command, paths, storage, runtimeOptions, dependencies 
     username: credentials.username,
     password: credentials.password
   };
-  writeRuntime(storage, host, port, credentials, previousRuntime?.systemProxyEnabled === true);
-  if (!await syncRulesFn(paths, storage, runtimeOptions, endpoint)) return false;
-  const shouldEnableSystemProxy = config.systemProxy;
-  const shouldConfigureSystemProxy = shouldEnableSystemProxy || previousRuntime?.systemProxyEnabled === true;
-  if (shouldConfigureSystemProxy
-    && !configureSystemProxyFn(paths, endpoint, shouldEnableSystemProxy)) return false;
-  writeRuntime(storage, host, port, credentials, shouldEnableSystemProxy);
-  return true;
+  let completed = false;
+  let cleanupSystemProxy = previousRuntime?.systemProxyEnabled === true;
+  try {
+    writeRuntime(storage, host, port, credentials, cleanupSystemProxy);
+    if (!await syncRulesFn(paths, storage, runtimeOptions, endpoint)) return false;
+    const shouldEnableSystemProxy = config.systemProxy;
+    const shouldConfigureSystemProxy = shouldEnableSystemProxy || cleanupSystemProxy;
+    if (shouldConfigureSystemProxy) {
+      cleanupSystemProxy = true;
+      if (!configureSystemProxyFn(paths, endpoint, shouldEnableSystemProxy)) return false;
+    }
+    writeRuntime(storage, host, port, credentials, shouldEnableSystemProxy);
+    completed = true;
+    return true;
+  } finally {
+    if (!completed) {
+      writeRuntime(storage, host, port, credentials, cleanupSystemProxy);
+      stopProxy(paths, storage, { runWhistleFn, configureSystemProxyFn });
+    }
+  }
 }
 
 function stopProxy(paths, storage, dependencies = {}) {

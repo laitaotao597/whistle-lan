@@ -121,3 +121,45 @@ test('automatically enables and disables the system proxy while tracking ownersh
   assert.deepEqual(systemProxyActions.at(-1), { enabled: false, endpoint: '127.0.0.1:10098' });
   assert.equal(storage.readRuntime(), null);
 });
+
+test('stops Whistle when startup fails after the process launches', async t => {
+  const appDir = mkdtempSync(join(tmpdir(), 'whistle-lan-startup-rollback-'));
+  t.after(() => rmSync(appDir, { recursive: true, force: true }));
+  const paths = createPaths({ env: { WHISTLE_LAN_HOME: appDir } });
+  const storage = createStorage(paths);
+  const whistleActions = [];
+  const dependencies = {
+    passwordGenerator: () => 'generated-password',
+    runWhistleFn: args => {
+      whistleActions.push(args[0]);
+      return true;
+    },
+    syncRulesFn: async () => { throw new Error('sync failed'); },
+    configureSystemProxyFn: () => true
+  };
+
+  await assert.rejects(startProxy('start', paths, storage, {}, dependencies), /sync failed/);
+  assert.deepEqual(whistleActions, ['start', 'stop']);
+  assert.equal(storage.readRuntime(), null);
+});
+
+test('disables a partially configured system proxy when startup fails', async t => {
+  const appDir = mkdtempSync(join(tmpdir(), 'whistle-lan-proxy-rollback-'));
+  t.after(() => rmSync(appDir, { recursive: true, force: true }));
+  const paths = createPaths({ env: { WHISTLE_LAN_HOME: appDir } });
+  const storage = createStorage(paths);
+  const systemProxyActions = [];
+  const dependencies = {
+    passwordGenerator: () => 'generated-password',
+    runWhistleFn: () => true,
+    syncRulesFn: async () => true,
+    configureSystemProxyFn: (_paths, _endpoint, enabled) => {
+      systemProxyActions.push(enabled);
+      return enabled === false;
+    }
+  };
+
+  assert.equal(await startProxy('start', paths, storage, {}, dependencies), false);
+  assert.deepEqual(systemProxyActions, [true, false]);
+  assert.equal(storage.readRuntime(), null);
+});
