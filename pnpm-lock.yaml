@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       whistle:
-        specifier: 2.10.9
-        version: 2.10.9
+        specifier: 2.10.14
+        version: 2.10.14
 
 packages:
 
@@ -18,8 +18,8 @@ packages:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
 
-  adm-zip@0.6.0:
-    resolution: {integrity: sha512-XleryMhbuksdKtofnWZ9Sk+4CUTbms4Mb/EU32SZwToAyZ5RgVos/ki8n+yr0LWHOGKuakbXTuuYNHLQjhddgg==}
+  adm-zip@0.6.1:
+    resolution: {integrity: sha512-Xwrja8nx9e5o2N1my4DsKCeKpdrnACyr1wtbPxBDgGzKzKyE9kRtBFA8mWldI+RVlD7CBZNWY/wQ2+ydwOR6kQ==}
     engines: {node: '>=14.0'}
 
   append-field@1.0.0:
@@ -31,8 +31,8 @@ packages:
   async-limiter@2.0.0:
     resolution: {integrity: sha512-nyHFzvVaR+4mfHc90/VqOUQjlnk9+ioDxQfqDuqKnm3m9sIT7joVKW8dkxeaKpamMJ3MYD73t6M8PMKEWlQESQ==}
 
-  body-parser@1.20.6:
-    resolution: {integrity: sha512-p5tAzS57i5MV9fZFDj9LeIiTZEufbSe2eDozP+ElheSUq1m74CRq1jI4mYNDdVs9vQztXFLuk/Gd6BWTdwRJ5g==}
+  body-parser@1.20.9:
+    resolution: {integrity: sha512-FISIQxV5u91Y9gvuFq3q/tA/qTqLJn3AhRcEvyozyhJTh5OBFFtv827AdHU7Rbyct4r+Ba1/99oFa1Y3yuFsdw==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
 
   buffer-from@1.1.2:
@@ -267,8 +267,8 @@ packages:
     resolution: {integrity: sha512-eonl3sLUha+S1GzTPxychyhnUzKyeQkZ7jLjKrBagJgPla13F+uQ71HgpFefyHgqrjEbCPkDArxYsjY8/+gLKA==}
     engines: {node: '>= 0.4.0'}
 
-  node-forge@1.4.0:
-    resolution: {integrity: sha512-LarFH0+6VfriEhqMMcLX2F7SwSXeWwnEAJEsYm5QKWchiVYVvJyV9v7UDvUv+w5HO23ZpQTXDv/GxdDdMyOuoQ==}
+  node-forge@1.4.3:
+    resolution: {integrity: sha512-P6wzfh6t70avmV8FrVEAd/36sOPJQ+hkaJVX1Laap9J/77m7M0eyozDvc8SwnDf4P7MP94gwbAAo0rg3YVXT+g==}
     engines: {node: '>= 6.13.0'}
 
   node-pac@0.5.1:
@@ -318,6 +318,10 @@ packages:
 
   qs@6.15.3:
     resolution: {integrity: sha512-O9gl3zCl5h5blw1KGUzQKhA5oUXSl8rwUIM5o0S3nCXMliSvy5Dzx7/DJcI+SwgICv+IneSZwhBh1oSyEHA71A==}
+    engines: {node: '>=0.6'}
+
+  qs@6.16.2:
+    resolution: {integrity: sha512-VYdnB5S7/0IeXzBacUtwNAaM6d7Y/PgYnNC7bJCI6meqA/OgnsQbZMtVW8Dt2D1PHgbHGtYmhSoEIgvt7xZ2ZA==}
     engines: {node: '>=0.6'}
 
   range-parser@1.2.1:
@@ -439,9 +443,9 @@ packages:
   weinre2@1.3.6:
     resolution: {integrity: sha512-xKawRFdgaFvxDDsb0jJ7KpnqYaAFFMvd+VlhFHdi/YSCJSGjYCxjMHuDobViddZVosfiGkQQv6/GHKqxN98EaQ==}
 
-  whistle@2.10.9:
-    resolution: {integrity: sha512-B4u/5aMCOXZmO4pFidjDKs9bXM8Z6AA6ibX1Qt87pGNFbHgp7loyvIEllx9sncx/m2PyOipgu/YCufJi2OPYJA==}
-    engines: {node: '>= 8.8'}
+  whistle@2.10.14:
+    resolution: {integrity: sha512-oLAE+iWvmpJHPnb+R7bEVpBcW9UjqiLCMSHr/UvP3CO/synTvt7i4vI/oIgEjAYrRw6z4MGGMPm0AQfKTxnkXg==}
+    engines: {node: '>= 16.0.0'}
     hasBin: true
 
   ws-parser@0.6.4:
@@ -470,7 +474,7 @@ snapshots:
       mime-types: 2.1.35
       negotiator: 0.6.3
 
-  adm-zip@0.6.0: {}
+  adm-zip@0.6.1: {}
 
   append-field@1.0.0: {}
 
@@ -478,7 +482,7 @@ snapshots:
 
   async-limiter@2.0.0: {}
 
-  body-parser@1.20.6:
+  body-parser@1.20.9:
     dependencies:
       bytes: 3.1.2
       content-type: 1.0.5
@@ -488,7 +492,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.4.24
       on-finished: 2.4.1
-      qs: 6.15.3
+      qs: 6.16.2
       raw-body: 2.5.3
       type-is: 1.6.18
       unpipe: 1.0.0
@@ -573,7 +577,7 @@ snapshots:
     dependencies:
       accepts: 1.3.8
       array-flatten: 1.1.1
-      body-parser: 1.20.6
+      body-parser: 1.20.9
       content-disposition: 0.5.4
       content-type: 1.0.5
       cookie: 0.7.2
@@ -734,7 +738,7 @@ snapshots:
 
   netmask@2.1.1: {}
 
-  node-forge@1.4.0: {}
+  node-forge@1.4.3: {}
 
   node-pac@0.5.1:
     dependencies:
@@ -768,6 +772,11 @@ snapshots:
   pseudomap@1.0.2: {}
 
   qs@6.15.3:
+    dependencies:
+      es-define-property: 1.0.1
+      side-channel: 1.1.1
+
+  qs@6.16.2:
     dependencies:
       es-define-property: 1.0.1
       side-channel: 1.1.1
@@ -922,11 +931,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  whistle@2.10.9:
+  whistle@2.10.14:
     dependencies:
-      adm-zip: 0.6.0
+      adm-zip: 0.6.1
       async-limiter: 2.0.0
-      body-parser: 1.20.6
+      body-parser: 1.20.9
       colors: 1.1.2
       express: 4.22.2
       extend: 3.0.2
@@ -938,7 +947,7 @@ snapshots:
       lru-cache: 4.1.5
       mime: 1.6.0
       multer2: 1.1.1
-      node-forge: 1.4.0
+      node-forge: 1.4.3
       node-pac: 0.5.1
       parseurl: 1.3.3
       pfork: 0.6.3

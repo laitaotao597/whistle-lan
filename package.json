@@ -1,6 +1,6 @@
 {
   "name": "whistle-lan",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "packageManager": "pnpm@9.9.0",
   "type": "module",
   "description": "Safe LAN development proxy CLI powered by Whistle",
@@ -40,7 +40,7 @@
     "test": "node --test"
   },
   "dependencies": {
-    "whistle": "2.10.9"
+    "whistle": "2.10.14"
   },
   "bundleDependencies": [
     "whistle"
